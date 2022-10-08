@@ -11,6 +11,7 @@
 void interpret_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_ele, *temp;
+	int i;
 
 	new_ele = malloc(sizeof(stack_t));
 	if (!new_ele)
@@ -25,10 +26,15 @@ void interpret_push(stack_t **stack, unsigned int line_number)
 		return;
 	}
 
-	if (atoi(op_toks[1]) == 0 && (strcmp(op_toks[1], "0") != 0))
+	for (i = 0; op_toks[1][i]; i++)
 	{
-		add_err_to_optoks(not_int(line_number));
-		return;
+		if (op_toks[1][i] == '-' && i == 0)
+			continue;
+		if (op_toks[1][i] < '0' || op_toks[1][i] > '9')
+		{
+			add_err_to_optoks(not_int(line_number));
+			return;
+		}
 	}
 
 	new_ele->n = atoi(op_toks[1]);
