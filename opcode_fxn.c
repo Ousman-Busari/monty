@@ -108,7 +108,6 @@ void interpret_swap(stack_t **stack, unsigned int line_number)
 	temp->next = temp1->next;
 	if (temp1->next)
 		temp1->next->prev = temp;
-	temp1->next->prev = temp;
 	temp1->next = temp;
 	temp1->prev = *stack;
 	temp->prev = temp1;
