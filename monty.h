@@ -62,6 +62,14 @@ void interpret_pop(stack_t **stack, unsigned int line_number);
 void interpret_pall(stack_t **stack, unsigned int line_number);
 void interpret_pint(stack_t **stack, unsigned int line_number);
 void interpret_swap(stack_t **stack, unsigned int line_number);
+void interpret_add(stack_t **stack, unsigned int line_number);
+void interpret_nop(stack_t **satck, unsigned int line_number);
+void interpret_sub(stack_t **stack, unsigned int line_number);
+void interpret_div(stack_t **stack, unsigned int line_number);
+void interpret_mul(stack_t **stack, unsigned int line_number);
+void interpret_mod(stack_t **stack, unsigned int line_number);
+void interpret_pchar(stack_t **stack, unsigned int line_number);
+
 void add_err_to_optoks(int error_code);
 
 /* tokenize each line of the file */
@@ -77,9 +85,11 @@ int usage_error(void);
 int file_error(char *file);
 int malloc_error(void);
 int pop_error(unsigned int line_number);
-int swap_error(unsigned int line_number);
+int short_stack_error(unsigned int line_number, char *op);
+int zero_div_error(unsigned int line_number);
+int pchar_error(unsigned int line_number);
 
-/* interpretation functions */
+/* to-run functions */
 unsigned int token_arr_len(void);
 void (*get_interpreter(char *opcode))(stack_t **stack,
 				      unsigned int line_number);

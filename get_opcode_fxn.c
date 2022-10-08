@@ -51,6 +51,13 @@ void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num)
 		{"pall", interpret_pall},
 		{"pint", interpret_pint},
 		{"swap", interpret_swap},
+		{"add", interpret_add},
+		{"nop", interpret_nop},
+		{"sub", interpret_sub},
+		{"div", interpret_div},
+		{"mul", interpret_mul},
+		{"mod", interpret_mod},
+		{"pchar", interpret_pchar},
 		{NULL, NULL}
 	};
 

@@ -32,24 +32,32 @@ int malloc_error(void)
  *
  * Return: Nothing
  */
-
 int pop_error(unsigned int line_number)
 {
 	fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
 	return (EXIT_FAILURE);
 }
 
-
 /**
- * swap_error - prints message to stderr when swap is called
- *              on an one-element stack
+ * zero_div_error - prints message to stderr when 0th element of stach is zero
  * @line_number: line number of the file where the error is encountered
  *
  * Return: Nothing
  */
-
-int swap_error(unsigned int line_number)
+int zero_div_error(unsigned int line_number)
 {
-	fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+	fprintf(stderr, "L%u: division by zero\n", line_number);
+	return (EXIT_FAILURE);
+}
+
+/**
+ * pchar_error - prints message to stderr If the value is not in the ascii table
+ * @line_number: line number of the file where the error is encountered
+ *
+ * Return: Nothing
+ */
+int pchar_error(unsigned int line_number)
+{
+	fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
 	return (EXIT_FAILURE);
 }

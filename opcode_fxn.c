@@ -124,7 +124,7 @@ void interpret_swap(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		add_err_to_optoks(swap_error(line_number));
+		add_err_to_optoks(short_stack_error(line_number, "swap"));
 		return;
 	}
 
