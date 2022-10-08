@@ -81,12 +81,15 @@ int monty_run(FILE *stream)
 	{
 		line_number++;
 		op_toks = _strtok(line, DELIMS);
+		if (op_toks == NULL)
+		{
+			free_stack(&stack);
+			return (malloc_error());
+		}
 		if (op_toks[0] == NULL)
 		{
 			if(is_empty_line(line, DELIMS))
 				continue;
-			free_stack(&stack);
-			return (malloc_error());
 		}
 
 		if (op_toks[0][0] == '#')

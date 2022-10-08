@@ -1,7 +1,7 @@
 push 1
-pint
 
+pall Holberton School!
 
-push 57
+push 67
 
-pint
+pall
