@@ -80,7 +80,6 @@ int pop_error(unsigned int line_number);
 int swap_error(unsigned int line_number);
 
 /* interpretation functions */
-/*int is_empty_line(char *line, char *delims); */
 unsigned int token_arr_len(void);
 void (*get_interpreter(char *opcode))(stack_t **stack,
 				      unsigned int line_number);

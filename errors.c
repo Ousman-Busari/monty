@@ -32,7 +32,7 @@ int empty_stack(unsigned int line_number)
 
 
 /**
- * unknown_instruction - prints messaage to stderr when an unknown operation is
+ * unknown_opcode - prints messaage to stderr when an unknown operation is
  *                       performed on the stack
  * @opcode: the specified operation
  * @line_number: the line number of the file where the errror is encountered
