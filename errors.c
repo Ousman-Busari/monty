@@ -40,7 +40,7 @@ int empty_stack(unsigned int line_number)
  * Return: EXIT_FAILURE
  */
 
-int unknown_instruction(char *opcode, unsigned int line_number)
+int unknown_opcode(char *opcode, unsigned int line_number)
 {
 	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 	return (EXIT_FAILURE);

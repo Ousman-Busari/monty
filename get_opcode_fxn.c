@@ -108,11 +108,9 @@ int monty_run(FILE *stream)
 
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-
 	while (getline(&line, &len, stream) != -1)
 	{
-		line_number++;
-		op_toks = _strtok(line, DELIMS);
+		line_number++, op_toks = _strtok(line, DELIMS);
 		if (op_toks == NULL)
 		{
 			free_stack(&stack);
@@ -126,8 +124,7 @@ int monty_run(FILE *stream)
 		op_func = get_interpreter(op_toks[0]);
 		if (op_func == NULL)
 		{
-			exit_status = unknown_instruction(op_toks[0],
-							  line_number);
+			exit_status = unknown_opcode(op_toks[0], line_number);
 			free_tokens();
 			break;
 		}
@@ -141,12 +138,6 @@ int monty_run(FILE *stream)
 		}
 		free_tokens();
 	}
-	free_stack(&stack);
-	if (line && *line == 0)
-	{
-		free(line);
-		return (98);
-	}
-	free(line);
+	free_stack(&stack), free(line);
 	return (exit_status);
 }

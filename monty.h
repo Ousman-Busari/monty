@@ -72,7 +72,7 @@ char **_strtok(char *syt, char *delims);
 /* error messages */
 int not_int(unsigned int line_number);
 int empty_stack(unsigned int line_number);
-int unknown_instruction(char *opcode, unsigned int line_number);
+int unknown_opcode(char *opcode, unsigned int line_number);
 int usage_error(void);
 int file_error(char *file);
 int malloc_error(void);
