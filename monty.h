@@ -62,6 +62,7 @@ void interpret_pop(stack_t **stack, unsigned int line_number);
 void interpret_pall(stack_t **stack, unsigned int line_number);
 void interpret_pint(stack_t **stack, unsigned int line_number);
 void interpret_swap(stack_t **stack, unsigned int line_number);
+void add_err_to_optoks(int error_code);
 
 /* tokenize each line of the file */
 int token_len(char *str, char *delims);

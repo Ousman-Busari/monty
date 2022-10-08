@@ -15,19 +15,19 @@ void interpret_push(stack_t **stack, unsigned int line_number)
 	new_ele = malloc(sizeof(stack_t));
 	if (!new_ele)
 	{
-		malloc_error();
+		add_err_to_optoks(malloc_error());
 		return;
 	}
 
 	if (op_toks[1] == NULL)
 	{
-		not_int(line_number);
+		add_err_to_optoks(not_int(line_number));
 		return;
 	}
 
 	if (atoi(op_toks[1]) == 0 && (strcmp(op_toks[1], "0") != 0))
 	{
-		not_int(line_number);
+		add_err_to_optoks(not_int(line_number));
 		return;
 	}
 
@@ -45,7 +45,6 @@ void interpret_push(stack_t **stack, unsigned int line_number)
 	else
 	{
 		temp = (*stack)->next;
-
 		while (temp)
 			temp = temp->next;
 		temp->next = new_ele;
@@ -68,13 +67,10 @@ void interpret_pall(stack_t **stack, unsigned int line_number)
 
 void interpret_pint(stack_t **stack, unsigned int line_number)
 {
-	if(*stack != NULL)
+	if((*stack)->next)
 		printf("%d\n", (*stack)->next->n);
 	else
-	{
-		empty_stack(line_number);
-		return;
-	}
+		add_err_to_optoks(empty_stack(line_number));
 }
 
 void interpret_pop(stack_t **stack, unsigned int line_number)
@@ -87,10 +83,7 @@ void interpret_pop(stack_t **stack, unsigned int line_number)
 		free(temp);
 	}
 	else
-	{
-		pop_error(line_number);
-		return;
-	}
+		add_err_to_optoks(pop_error(line_number));
 }
 
 void interpret_swap(stack_t **stack, unsigned int line_number)
@@ -109,8 +102,5 @@ void interpret_swap(stack_t **stack, unsigned int line_number)
 		(*stack)->next = temp1;
 	}
 	else
-	{
-		swap_error(line_number);
-		return;
-	}
+		add_err_to_optoks(swap_error(line_number));
 }

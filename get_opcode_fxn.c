@@ -4,6 +4,19 @@
 
 char **op_toks;
 
+void free_tokens(void)
+{
+	size_t i = 0;
+
+	if (op_toks == NULL)
+		return;
+
+	for (i = 0; op_toks[i]; i++)
+		free(op_toks[i]);
+
+	free(op_toks);
+}
+
 int is_empty_line(char *line, char *delims)
 {
 	int line_index, delims_index;
@@ -78,7 +91,7 @@ int monty_run(FILE *stream)
 
 		if (op_toks[0][0] == '#')
 		{
-			free(op_toks);
+			free_tokens();
 			continue;
 		}
 
@@ -87,30 +100,28 @@ int monty_run(FILE *stream)
 		{
 			exit_status = unknown_instruction(op_toks[0],
 							  line_number);
-			free(op_toks);
+			free_tokens();
 			break;
 		}
 		prev_tok_len = token_arr_len();
 		op_func(&stack, line_number);
 		if (token_arr_len() != prev_tok_len)
 		{
-			if (op_toks && op_toks[prev_tok_len])
-				exit_status = atoi(op_toks[prev_tok_len]);
-			else
-				exit_status = EXIT_FAILURE;
-			free(op_toks);
+			exit_status = atoi(op_toks[prev_tok_len]);
+			free_tokens();
 			break;
 		}
-		free(op_toks);
+		free_tokens();
 	}
+
 	free_stack(&stack);
 
-/*	if (line && *line == 0)
+	if (line && *line == 0)
 	{
 		free(line);
 		return (98);
 	}
-*/
+
 	free(line);
 	return (exit_status);
 }

@@ -17,9 +17,8 @@ int init_stack(stack_t **stack)
 
 void free_stack(stack_t **stack)
 {
-	stack_t *temp;
+	stack_t *temp = *stack;
 
-	temp = *stack;
 	while (*stack)
 	{
 		temp = (*stack)->next;
