@@ -96,14 +96,15 @@ void interpret_swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp, *temp1;
 
-	temp = (*stack)->next;
-	temp1 = temp->next;
-
-	if(temp == NULL || temp1 == NULL)
+	if((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
 		add_err_to_optoks(swap_error(line_number));
 		return;
 	}
+
+	temp = (*stack)->next;
+	temp1 = temp->next;
+
 	temp->next = temp1->next;
 	if (temp1->next)
 		temp1->next->prev = temp;
