@@ -1,13 +1,12 @@
 #include "monty.h"
 
 /**
- * interpret_push - pushes an element a stack_t linked list
+ * interpret_push - pushes an element to a stack_t linked list
  * @stack: pointer to the head node of the list
  * @line_number: the current working line of the monty bytecodes file
  *
  * Return: Nothing
  */
-
 void interpret_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_ele, *temp;
@@ -19,13 +18,11 @@ void interpret_push(stack_t **stack, unsigned int line_number)
 		add_err_to_optoks(malloc_error());
 		return;
 	}
-
 	if (op_toks[1] == NULL)
 	{
 		add_err_to_optoks(not_int(line_number));
 		return;
 	}
-
 	for (i = 0; op_toks[1][i]; i++)
 	{
 		if (op_toks[1][i] == '-' && i == 0)
@@ -36,14 +33,13 @@ void interpret_push(stack_t **stack, unsigned int line_number)
 			return;
 		}
 	}
-
 	new_ele->n = atoi(op_toks[1]);
-
 	if (is_stack(stack))
 	{
 		new_ele->prev = *stack;
-		if ((temp = (*stack)->next))
+		if ((*stack)->next)
 		{
+			temp = (*stack)->next;
 			new_ele->next = temp;
 			temp->prev = new_ele;
 		}
@@ -59,6 +55,13 @@ void interpret_push(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ * interpret_pall - prints all elements in a stack_t linked list
+ * @stack: pointer to the head node of the list
+ * @line_number: the current working line of the monty bytecodes file
+ *
+ * Return: Nothing
+ */
 void interpret_pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
@@ -72,20 +75,35 @@ void interpret_pall(stack_t **stack, unsigned int line_number)
 	(void) line_number;
 }
 
+/**
+ * interpret_pint - prints the last element in a stack_t linked list
+ * @stack: pointer to the head node of the list
+ * @line_number: the current working line of the monty bytecodes file
+ *
+ * Return: Nothing
+ */
 void interpret_pint(stack_t **stack, unsigned int line_number)
 {
-	if((*stack)->next)
+	if ((*stack)->next)
 		printf("%d\n", (*stack)->next->n);
 	else
 		add_err_to_optoks(empty_stack(line_number));
 }
 
+/**
+ * interpret_pop - pops out the last element in a stack_t linked list
+ * @stack: pointer to the head node of the list
+ * @line_number: the current working line of the monty bytecodes file
+ *
+ * Return: Nothing
+ */
 void interpret_pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
-	if ((temp = (*stack)->next))
+	if ((*stack)->next)
 	{
+		temp = (*stack)->next;
 		(*stack)->next = temp->next;
 		free(temp);
 	}
@@ -93,11 +111,18 @@ void interpret_pop(stack_t **stack, unsigned int line_number)
 		add_err_to_optoks(pop_error(line_number));
 }
 
+/**
+ * interpret_swap - swaps the last two elementa in a stack_t linked list
+ * @stack: pointer to the head node of the list
+ * @line_number: the current working line of the monty bytecodes file
+ *
+ * Return: Nothing
+ */
 void interpret_swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp, *temp1;
 
-	if((*stack)->next == NULL || (*stack)->next->next == NULL)
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
 		add_err_to_optoks(swap_error(line_number));
 		return;

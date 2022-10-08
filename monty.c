@@ -1,5 +1,12 @@
 #include "monty.h"
 
+/**
+ * main -rums monty interpreter on an argument file
+ * @ac: number of arguments
+ * @av: pointer to the arrat of arguments
+ *
+ * Return: EXIT_SUCCESS on success, EXIT_FAILURE otherwise
+ */
 int main(int ac, char **av)
 {
 	FILE *stream_fd = NULL;

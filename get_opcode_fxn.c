@@ -4,6 +4,11 @@
 
 char **op_toks;
 
+/**
+ * free_tokens - free an array of tokens
+ *
+ * Return: Nothing
+ */
 void free_tokens(void)
 {
 	size_t i = 0;
@@ -17,25 +22,38 @@ void free_tokens(void)
 	free(op_toks);
 }
 
+/**
+ * is_empty_line - determines if a line is empty
+ * @line: the pointer to the buffer containing the line
+ * @delims: pointer to the strings of delimeter characters
+ *
+ * Return: 1 if empty, otherwise
+ */
 int is_empty_line(char *line, char *delims)
 {
 	int line_index, delims_index;
 
 	for (line_index = 0; line[line_index]; line_index++)
 	{
-			for (delims_index = 0; delims[delims_index];
-			     delims_index++)
-			{
-				if (line[line_index] == delims[delims_index])
-					break;
-			}
-			if (delims[delims_index] == '\0')
-				return (0);
+		for (delims_index = 0; delims[delims_index];
+		     delims_index++)
+		{
+			if (line[line_index] == delims[delims_index])
+				break;
+		}
+		if (delims[delims_index] == '\0')
+			return (0);
 	}
 
 	return (1);
 }
 
+
+/**
+ * token_arr_len - determines the length of an arr of tokens
+ *
+ * Return: length of the token arr
+ */
 unsigned int token_arr_len(void)
 {
 	unsigned int toks_len = 0;
@@ -45,6 +63,12 @@ unsigned int token_arr_len(void)
 	return (toks_len);
 }
 
+/**
+ * get_interpreter - gets the interpreter for each opcode
+ * @opcode: the opcode to be interpreted
+ *
+ * Return: Nothing
+ */
 void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num)
 {
 	int i;
@@ -65,6 +89,15 @@ void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num)
 
 	return (NULL);
 }
+
+
+/**
+ * monty_run - runs the monty bytecode interpreter on a file
+ * @stream: the file or stream of lines of bytecode
+ *
+ * Return: EXIT_SUCCESS -on success, otherwise
+ *         EXIT_FIALURE
+ */
 
 int monty_run(FILE *stream)
 {
@@ -88,7 +121,7 @@ int monty_run(FILE *stream)
 		}
 		if (op_toks[0] == NULL)
 		{
-			if(is_empty_line(line, DELIMS))
+			if (is_empty_line(line, DELIMS))
 				continue;
 		}
 

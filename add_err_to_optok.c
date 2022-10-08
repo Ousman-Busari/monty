@@ -1,5 +1,13 @@
 #include "monty.h"
 
+/**
+ * add_err_to_optoks - converts error code to string
+ *                     and add it to op_toks
+ * @error_code: the error coode to be added
+ *
+ * Return: Nothing
+ */
+
 void add_err_to_optoks(int error_code)
 {
 	int tok_len = 0, i = 0;
@@ -8,7 +16,7 @@ void add_err_to_optoks(int error_code)
 
 	tok_len = token_arr_len();
 	new_optoks = malloc(sizeof(char *) * (tok_len + 2));
-	if(!new_optoks)
+	if (!new_optoks)
 	{
 		malloc_error();
 		return;
@@ -21,7 +29,7 @@ void add_err_to_optoks(int error_code)
 	}
 
 	err_str = malloc(sizeof(char) * 2);
-	if(!err_str)
+	if (!err_str)
 	{
 		free(new_optoks);
 		malloc_error();
