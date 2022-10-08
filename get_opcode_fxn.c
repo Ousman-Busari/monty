@@ -90,7 +90,6 @@ void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num)
 	return (NULL);
 }
 
-
 /**
  * monty_run - runs the monty bytecode interpreter on a file
  * @stream: the file or stream of lines of bytecode
@@ -119,18 +118,11 @@ int monty_run(FILE *stream)
 			free_stack(&stack);
 			return (malloc_error());
 		}
-		if (op_toks[0] == NULL)
-		{
-			if (is_empty_line(line, DELIMS))
-				continue;
-		}
-
-		if (op_toks[0][0] == '#')
+		if (!op_toks[0] || op_toks[0][0] == '#')
 		{
 			free_tokens();
 			continue;
 		}
-
 		op_func = get_interpreter(op_toks[0]);
 		if (op_func == NULL)
 		{
@@ -149,15 +141,12 @@ int monty_run(FILE *stream)
 		}
 		free_tokens();
 	}
-
 	free_stack(&stack);
-
 	if (line && *line == 0)
 	{
 		free(line);
 		return (98);
 	}
-
 	free(line);
 	return (exit_status);
 }
