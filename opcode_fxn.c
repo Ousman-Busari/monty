@@ -63,10 +63,10 @@ void interpret_pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
-	temp = (*stack)->next;
-	while (temp)
+	temp = *stack;
+	while (temp->next)
 	{
-		printf("%d\n", temp->n);
+		printf("%d\n", temp->next->n);
 		temp = temp->next;
 	}
 	(void) line_number;
