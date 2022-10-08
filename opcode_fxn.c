@@ -41,11 +41,12 @@ void interpret_push(stack_t **stack, unsigned int line_number)
 
 	if (is_stack(stack))
 	{
-		temp = (*stack)->next;
-		new_ele->next = temp;
 		new_ele->prev = *stack;
-		if (temp)
+		if ((temp = (*stack)->next))
+		{
+			new_ele->next = temp;
 			temp->prev = new_ele;
+		}
 		(*stack)->next = new_ele;
 	}
 	else
