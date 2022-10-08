@@ -47,20 +47,36 @@ typedef struct instruction_s
 
 /* global variables and MACROS*/
 #define DELIMS  " \n\t\a\b"
-extern stack_t *stack;
-extern unsigned int line_number;
+#define STACK    0
+#define QUEUE    1
 extern char **op_toks;
+
+/* stack processes */
+int init_stack(stack_t **stack);
+void free_stack(stack_t **stack);
+int is_stack(stack_t **stack);
 
 /* opcode functions */
 void interpret_push(stack_t **stack, unsigned int line_number);
 void interpret_pop(stack_t **stack, unsigned int line_number);
 void interpret_pall(stack_t **stack, unsigned int line_number);
-
+void interpret_pint(stack_t **stack, unsigned int line_number);
+void interpret_swap(stack_t **stack, unsigned int line_number);
 
 /* tokenize each line of the file */
 int token_len(char *str, char *delims);
 int tokens_count(char *str, char *delims);
 char **_strtok(char *syt, char *delims);
+
+/* error messages */
+int not_int(unsigned int line_number);
+int empty_stack(unsigned int line_number);
+int unknown_instruction(char *opcode, unsigned int line_number);
+int usage_error(void);
+int file_error(char *file);
+int malloc_error(void);
+int pop_error(unsigned int line_number);
+int swap_error(unsigned int line_number);
 
 /* interpretation functions */
 int is_empty_line(char *line, char *delims);

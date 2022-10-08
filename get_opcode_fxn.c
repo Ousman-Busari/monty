@@ -1,8 +1,8 @@
+#define _GNU_SOURCE
 #include "monty.h"
+#include <stdio.h>
 
 char **op_toks;
-stack_t *stack;
-unsigned int line_number = 0;
 
 int is_empty_line(char *line, char *delims)
 {
@@ -11,7 +11,7 @@ int is_empty_line(char *line, char *delims)
 	for (line_index = 0; line[line_index]; line_index++)
 	{
 			for (delims_index = 0; delims[delims_index];
-			     delims_index)
+			     delims_index++)
 			{
 				if (line[line_index] == delims[delims_index])
 					break;
@@ -39,6 +39,8 @@ void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num)
 		{"push", interpret_push},
 		{"pop", interpret_pop},
 		{"pall", interpret_pall},
+		{"pint", interpret_pint},
+		{"swap", interpret_swap},
 		{NULL, NULL}
 	};
 
@@ -48,15 +50,19 @@ void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num)
 			return (op_fxn[i].f);
 	}
 
-	return NULL;
+	return (NULL);
 }
 
 int monty_run(FILE *stream)
 {
+	stack_t *stack = NULL;
 	void (*op_func)(stack_t **, unsigned int);
 	char *line = NULL;
-	unsigned int prev_tok_len = 0, i = 0;
+	unsigned int line_number = 0, prev_tok_len = 0;
 	size_t len = 0, exit_status = EXIT_SUCCESS;
+
+	if (init_stack(&stack) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 
 	while (getline(&line, &len, stream) != -1)
 	{
@@ -66,7 +72,8 @@ int monty_run(FILE *stream)
 		{
 			if(is_empty_line(line, DELIMS))
 				continue;
-			return (98); /* memery allocation error */
+			free_stack(&stack);
+			return (malloc_error());
 		}
 
 		if (op_toks[0][0] == '#')
@@ -78,7 +85,8 @@ int monty_run(FILE *stream)
 		op_func = get_interpreter(op_toks[0]);
 		if (op_func == NULL)
 		{
-			/* exit status = unknow_op_error(opo_toks[0], line_number) */
+			exit_status = unknown_instruction(op_toks[0],
+							  line_number);
 			free(op_toks);
 			break;
 		}
@@ -95,13 +103,14 @@ int monty_run(FILE *stream)
 		}
 		free(op_toks);
 	}
+	free_stack(&stack);
 
-	if (line && *line == 0)
+/*	if (line && *line == 0)
 	{
 		free(line);
 		return (98);
 	}
-
+*/
 	free(line);
 	return (exit_status);
 }

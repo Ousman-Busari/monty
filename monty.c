@@ -12,5 +12,5 @@ int main(int ac, char **av)
 		return (98); /* (f_open_error(av[1])); */
 	exit_code = monty_run(stream_fd);
 	fclose(stream_fd);
-	return (0); /* (exit_code); */
+	return (exit_code);
 }

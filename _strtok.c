@@ -1,5 +1,6 @@
+#define _GNU_SOURCE
+#include <string.h>
 #include "monty.h"
-
 
 /**
  * token_len - determines the length of a token/word in a string
@@ -89,7 +90,7 @@ int tokens_count(char *str, char *delims)
 char **_strtok(char *str, char *delims)
 {
 	char **str_toks_arr;
-	int index = 0, len = 0;
+	int index = 0;
 	int i, delims_len = 0, in;
 	int nth_token = 0, toks_count, tok_len;
 
