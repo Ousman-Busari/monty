@@ -99,7 +99,7 @@ void interpret_swap(stack_t **stack, unsigned int line_number)
 	temp = (*stack)->next;
 	temp1 = temp->next;
 
-	if(temp && temp1)
+	if(temp && temp1 && (op_toks[1] == NULL))
 	{
 	        temp->next = temp1->next;
 		if (temp1->next)
