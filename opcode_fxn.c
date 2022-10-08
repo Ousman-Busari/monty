@@ -99,17 +99,17 @@ void interpret_swap(stack_t **stack, unsigned int line_number)
 	temp = (*stack)->next;
 	temp1 = temp->next;
 
-	if(temp && temp1 && (op_toks[1] == NULL))
+	if(temp == NULL || temp1 == NULL)
 	{
-	        temp->next = temp1->next;
-		if (temp1->next)
-			temp1->next->prev = temp;
-		temp1->next->prev = temp;
-		temp1->next = temp;
-		temp1->prev = *stack;
-	        temp->prev = temp1;
-		(*stack)->next = temp1;
-	}
-	else
 		add_err_to_optoks(swap_error(line_number));
+		return;
+	}
+	temp->next = temp1->next;
+	if (temp1->next)
+		temp1->next->prev = temp;
+	temp1->next->prev = temp;
+	temp1->next = temp;
+	temp1->prev = *stack;
+	temp->prev = temp1;
+	(*stack)->next = temp1;
 }
