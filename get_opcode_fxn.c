@@ -23,33 +23,6 @@ void free_tokens(void)
 }
 
 /**
- * is_empty_line - determines if a line is empty
- * @line: the pointer to the buffer containing the line
- * @delims: pointer to the strings of delimeter characters
- *
- * Return: 1 if empty, otherwise
- */
-int is_empty_line(char *line, char *delims)
-{
-	int line_index, delims_index;
-
-	for (line_index = 0; line[line_index]; line_index++)
-	{
-		for (delims_index = 0; delims[delims_index];
-		     delims_index++)
-		{
-			if (line[line_index] == delims[delims_index])
-				break;
-		}
-		if (delims[delims_index] == '\0')
-			return (0);
-	}
-
-	return (1);
-}
-
-
-/**
  * token_arr_len - determines the length of an arr of tokens
  *
  * Return: length of the token arr
@@ -108,6 +81,7 @@ int monty_run(FILE *stream)
 
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+
 	while (getline(&line, &len, stream) != -1)
 	{
 		line_number++;
