@@ -81,7 +81,7 @@ int monty_run(FILE *stream)
 	{
 		line_number++;
 		op_toks = _strtok(line, DELIMS);
-		if (op_toks[0] == NULL)
+		if (op_toks == NULL)
 		{
 			if(is_empty_line(line, DELIMS))
 				continue;
