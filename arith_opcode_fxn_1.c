@@ -127,6 +127,7 @@ void interpret_rotl(stack_t **stack, unsigned int line_number)
 		temp_end = temp_end->next;
 
 	temp_top = (*stack)->next;
+
 	temp_end->next = temp_top;
 	(*stack)->next = temp_top->next;
 	temp_top->next->prev = *stack;
@@ -155,10 +156,12 @@ void interpret_rotr(stack_t **stack, unsigned int line_number)
 		temp_end = temp_end->next;
 
 	temp_top = (*stack)->next;
-	temp_end->prev->next = NULL;
+
 	(*stack)->next = temp_end;
 	temp_end->next = temp_top;
 	temp_top->prev = temp_end;
+	temp_end->prev->next = NULL;
+	temp_end->prev = NULL;
 
 	(void) line_number;
 }
