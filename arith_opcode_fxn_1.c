@@ -88,7 +88,8 @@ void interpret_pstr(stack_t **stack, unsigned int line_number)
 			char_count++;
 			temp = temp->next;
 		}
-		break;
+		else
+			break;
 	}
 
 	if  (char_count == 0)
