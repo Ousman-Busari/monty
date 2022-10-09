@@ -51,9 +51,10 @@ int zero_div_error(unsigned int line_number)
 }
 
 /**
- * pchar_error - prints message to stderr If the value is not in the ascii table
+ * pchar_error - prints message to stderr If
+ *               the value is not in the ascii table
  * @line_number: line number of the file where the error is encountered
- *
+ * @situation: why pchar can't run
  * Return: Nothing
  */
 int pchar_error(unsigned int line_number, char *situation)

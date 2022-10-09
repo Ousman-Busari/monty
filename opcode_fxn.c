@@ -40,19 +40,15 @@ void interpret_push(stack_t **stack, unsigned int line_number)
 		if ((*stack)->next)
 		{
 			temp = (*stack)->next;
-			new_ele->next = temp;
-			temp->prev = new_ele;
+			new_ele->next = temp, temp->prev = new_ele;
 		}
 		(*stack)->next = new_ele;
+		return;
 	}
-	else
-	{
-		temp = (*stack)->next;
-		while (temp)
-			temp = temp->next;
-		temp->next = new_ele;
-		new_ele->prev = temp;
-	}
+	temp = (*stack)->next;
+	while (temp)
+		temp = temp->next;
+	temp->next = new_ele, new_ele->prev = temp;
 }
 
 /**

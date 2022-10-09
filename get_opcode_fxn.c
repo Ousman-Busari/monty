@@ -58,6 +58,7 @@ void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num)
 		{"mul", interpret_mul},
 		{"mod", interpret_mod},
 		{"pchar", interpret_pchar},
+		{"pstr", interpret_pstr},
 		{NULL, NULL}
 	};
 

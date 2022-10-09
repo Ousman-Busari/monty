@@ -69,6 +69,7 @@ void interpret_div(stack_t **stack, unsigned int line_number);
 void interpret_mul(stack_t **stack, unsigned int line_number);
 void interpret_mod(stack_t **stack, unsigned int line_number);
 void interpret_pchar(stack_t **stack, unsigned int line_number);
+void interpret_pstr(stack_t **stack, unsigned int line_number);
 
 void add_err_to_optoks(int error_code);
 
@@ -91,8 +92,7 @@ int pchar_error(unsigned int line_number, char *situation);
 
 /* to-run functions */
 unsigned int token_arr_len(void);
-void (*get_interpreter(char *opcode))(stack_t **stack,
-				      unsigned int line_number);
+void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num);
 int monty_run(FILE *stream);
 
 #endif /* __MONTY_H__ */

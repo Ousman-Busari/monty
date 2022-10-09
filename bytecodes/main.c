@@ -5,7 +5,7 @@
 
 int main(void)
 {
-	char *t = "        \n";
+	char *t = "School";
 	char **tok;
 
 	tok =_strtok(t, DELIMS);

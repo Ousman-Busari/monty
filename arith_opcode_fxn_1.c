@@ -52,9 +52,38 @@ void interpret_pchar(stack_t **stack, unsigned int line_number)
 	temp = (*stack)->next;
 	if (temp->n < 0 || temp->n > 127)
 	{
-		add_err_to_optoks(pchar_error(line_number, "value out of range"));
+		add_err_to_optoks(pchar_error(line_number,
+					      "value out of range"));
 		return;
 	}
 
 	printf("%c\n", temp->n);
+}
+
+/**
+ * interpret_pstr - prints the string starting at the top of the stack,
+ *                  followed by a new line
+ * @stack: the stack of the data
+ * @line_number: the line number of the file where the fucntion is called
+ *
+ * Return: Nothing
+ */
+void interpret_pstr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+
+	if ((*stack)->next == NULL)
+	{
+		printf("\n");
+		return;
+	}
+
+	temp = (*stack)->next;
+	while (temp && temp->n != 0)
+	{
+		printf("%c", temp->n);
+		temp = temp->next;
+	}
+	printf("\n");
+	(void) line_number;
 }
