@@ -71,7 +71,17 @@ void interpret_pchar(stack_t **stack, unsigned int line_number)
 void interpret_pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
-	int char_count = 0, i;
+
+	temp = (*stack)->next;
+       	while (temp && temp->n > 0 && temp->n <= 127)
+	{
+		printf("%c", temp->n);
+		temp = temp->next;
+	}
+
+	printf("\n");
+
+/*	int char_count = 0, i;
 	char *str;
 
 	if ((*stack)->next == NULL)
@@ -109,7 +119,7 @@ void interpret_pstr(stack_t **stack, unsigned int line_number)
 	str[i] = '\n';
 	printf("%s", str);
 	free(str);
-	(void) line_number;
+*/	(void) line_number;
 }
 
 /**
