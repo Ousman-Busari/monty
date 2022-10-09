@@ -1,3 +1,2 @@
-push 98
-rotr
-pall
+push 128
+pstr

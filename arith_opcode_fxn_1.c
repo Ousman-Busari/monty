@@ -81,22 +81,27 @@ void interpret_pstr(stack_t **stack, unsigned int line_number)
 	}
 
 	temp = (*stack)->next;
-	while (temp && temp->n > 0 && temp->n <= 127)
+	while (temp)
 	{
-		char_count++;
-		temp = temp->next;
+		if (temp->n > 0 && temp->n <= 127)
+		{
+			char_count++;
+			temp = temp->next;
+		}
+		break;
 	}
 
 	if  (char_count == 0)
 		return ;
 
-	temp = (*stack)->next;
-	str = malloc(sizeof(char) * (char_count));
+	str = malloc(sizeof(char) * (char_count + 1));
 	if (!str)
 	{
 		malloc_error();
 		return;
 	}
+
+	temp = (*stack)->next;
 	for (i = 0; i < char_count; i++)
 	{
 		str[i] = temp->n;
