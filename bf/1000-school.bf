@@ -10,4 +10,4 @@
 +++++++.	PRINT 'o'
 .		PRINT 'o'
 ---.		PRINT 'l'
-<<+.		PRINT '\n'
+>++++++++++.	PRINT '\n'
