@@ -81,19 +81,17 @@ void interpret_pstr(stack_t **stack, unsigned int line_number)
 	}
 
 	temp = (*stack)->next;
-	while (temp)
+	while (temp && temp->n > 0 && temp->n <= 127)
 	{
-		if (temp->n > 0 && temp->n <= 127)
-		{
-			char_count++;
-			temp = temp->next;
-		}
-		else
-			break;
+		char_count++;
+		temp = temp->next;
 	}
 
 	if  (char_count == 0)
+	{
+		printf("\n");
 		return ;
+	}
 
 	str = malloc(sizeof(char) * (char_count + 1));
 	if (!str)
