@@ -98,7 +98,10 @@ void interpret_pstr(stack_t **stack, unsigned int line_number)
 		return;
 	}
 	for (i = 0; i < char_count; i++)
+	{
 		str[i] = temp->n;
+		temp = temp->next;
+	}
 	str[i] = '\n';
 	printf("%s", str);
 	free(str);
