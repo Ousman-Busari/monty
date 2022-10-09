@@ -87,7 +87,7 @@ int malloc_error(void);
 int pop_error(unsigned int line_number);
 int short_stack_error(unsigned int line_number, char *op);
 int zero_div_error(unsigned int line_number);
-int pchar_error(unsigned int line_number);
+int pchar_error(unsigned int line_number, char *situation);
 
 /* to-run functions */
 unsigned int token_arr_len(void);

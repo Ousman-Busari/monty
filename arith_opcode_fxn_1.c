@@ -45,14 +45,14 @@ void interpret_pchar(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL)
 	{
-		add_err_to_optoks(short_stack_error(line_number, "pchar"));
+		add_err_to_optoks(pchar_error(line_number, "stack empty"));
 		return;
 	}
 
 	temp = (*stack)->next;
 	if (temp->n < 0 || temp->n > 127)
 	{
-		add_err_to_optoks(pchar_error(line_number));
+		add_err_to_optoks(pchar_error(line_number, "value out of range"));
 		return;
 	}
 

@@ -56,8 +56,8 @@ int zero_div_error(unsigned int line_number)
  *
  * Return: Nothing
  */
-int pchar_error(unsigned int line_number)
+int pchar_error(unsigned int line_number, char *situation)
 {
-	fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
+	fprintf(stderr, "L%u: can't pchar, %s\n", line_number, situation);
 	return (EXIT_FAILURE);
 }
