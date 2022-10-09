@@ -70,7 +70,9 @@ void interpret_pchar(stack_t **stack, unsigned int line_number)
  */
 void interpret_pstr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp, *temp_prev;
+	stack_t *temp;
+	int char_count = 0, i;
+	char *str;
 
 	if ((*stack)->next == NULL)
 	{
@@ -81,13 +83,49 @@ void interpret_pstr(stack_t **stack, unsigned int line_number)
 	temp = (*stack)->next;
 	while (temp && temp->n > 0 && temp->n <= 127)
 	{
-		printf("%c", temp->n);
+		char_count++;
 		temp = temp->next;
 	}
 
-	temp_prev = temp->prev;
-	if ((temp_prev->n > 0 && temp_prev->n <= 127) &&
-	    (temp->n <= 0 || temp->n > 127))
-		printf("\n");
+	if  (char_count == 0)
+		return ;
+
+	temp = (*stack)->next;
+	str = malloc(sizeof(char) * (char_count));
+	if (!str)
+	{
+		malloc_error();
+		return;
+	}
+	for (i = 0; i < char_count; i++)
+		str[i] = temp->n;
+	str[i] = '\n';
+	printf("%s", str);
+	free(str);
+	(void) line_number;
+}
+
+/**
+ * interpret_rotl - rotates the stack to the top
+ * @stack: pointer to the head node of the list
+ * @line_number: the current working line of the monty bytecodes file
+ *
+ * Return: Nothing
+ */
+void interpret_rotl(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp_end, *temp_top;
+
+	temp_end = (*stack)->next;
+	while (temp_end->next)
+		temp_end = temp_end->next;
+
+	temp_top = (*stack)->next;
+	temp_end->next = temp_top;
+	(*stack)->next = temp_top->next;
+	temp_top->next->prev = *stack;
+	temp_top->prev = temp_end;
+	temp_top->next = NULL;
+
 	(void) line_number;
 }

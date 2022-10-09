@@ -1,2 +1,2 @@
-push -1
+push 98
 pstr
