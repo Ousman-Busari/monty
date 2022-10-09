@@ -72,6 +72,8 @@ void interpret_pchar(stack_t **stack, unsigned int line_number);
 void interpret_pstr(stack_t **stack, unsigned int line_number);
 void interpret_rotl(stack_t **stack, unsigned int line_number);
 void interpret_rotr(stack_t **stack, unsigned int line_number);
+void interpret_stack(stack_t **stack, unsigned int line_number);
+void interpret_queue(stack_t **stack, unsigned int line_number);
 
 void add_err_to_optoks(int error_code);
 

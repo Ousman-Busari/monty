@@ -5,6 +5,49 @@
 char **op_toks;
 
 /**
+ * add_err_to_optoks - converts error code to string
+ *                     and add it to op_toks
+ * @error_code: the error coode to be added
+ *
+ * Return: Nothing
+ */
+void add_err_to_optoks(int error_code)
+{
+	int tok_len = 0, i = 0;
+	char *err_str = NULL;
+	char **new_optoks = NULL;
+
+	tok_len = token_arr_len();
+	new_optoks = malloc(sizeof(char *) * (tok_len + 2));
+	if (!new_optoks)
+	{
+		malloc_error();
+		return;
+	}
+
+	while (i < tok_len)
+	{
+		new_optoks[i] = op_toks[i];
+		i++;
+	}
+
+	err_str = malloc(sizeof(char) * 2);
+	if (!err_str)
+	{
+		free(new_optoks);
+		malloc_error();
+		return;
+	}
+
+	err_str[0] = error_code + '0';
+
+	new_optoks[i++] = err_str;
+	new_optoks[i] = NULL;
+	free(op_toks);
+	op_toks = new_optoks;
+}
+
+/**
  * free_tokens - free an array of tokens
  *
  * Return: Nothing
@@ -61,6 +104,8 @@ void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num)
 		{"pstr", interpret_pstr},
 		{"rotl", interpret_rotl},
 		{"rotr", interpret_rotr},
+		{"stack", interpret_stack},
+		{"queue", interpret_queue},
 		{NULL, NULL}
 	};
 

@@ -73,53 +73,14 @@ void interpret_pstr(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 
 	temp = (*stack)->next;
-       	while (temp && temp->n > 0 && temp->n <= 127)
+
+	while (temp && temp->n > 0 && temp->n <= 127)
 	{
 		printf("%c", temp->n);
 		temp = temp->next;
 	}
-
 	printf("\n");
-
-/*	int char_count = 0, i;
-	char *str;
-
-	if ((*stack)->next == NULL)
-	{
-		printf("\n");
-		return;
-	}
-
-	temp = (*stack)->next;
-	while (temp && temp->n > 0 && temp->n <= 127)
-	{
-		char_count++;
-		temp = temp->next;
-	}
-
-	if  (char_count == 0)
-	{
-		printf("\n");
-		return ;
-	}
-
-	str = malloc(sizeof(char) * (char_count + 1));
-	if (!str)
-	{
-		malloc_error();
-		return;
-	}
-
-	temp = (*stack)->next;
-	for (i = 0; i < char_count; i++)
-	{
-		str[i] = temp->n;
-		temp = temp->next;
-	}
-	str[i] = '\n';
-	printf("%s", str);
-	free(str);
-*/	(void) line_number;
+	(void) line_number;
 }
 
 /**

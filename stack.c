@@ -12,7 +12,7 @@ int init_stack(stack_t **stack)
 
 	s = malloc(sizeof(stack_t));
 	if (!s)
-		return (EXIT_FAILURE); /* malloc_error */
+		return (malloc_error());
 
 	s->n = STACK;
 	(*stack) = s;
@@ -49,4 +49,30 @@ int is_stack(stack_t **stack)
 	if ((*stack)->n == 0)
 		return (1);
 	return (0);
+}
+
+/**
+ * stack - sets the format of the data to a stack(LIFO)
+ * @stack - address of the stack
+ * @line_number - line number of the monty bytecode file where stack is called
+ *
+ * Return: Nothing
+ */
+void interpret_stack(stack_t **stack, unsigned int line_number)
+{
+	(*stack)->n = STACK;
+	(void) line_number;
+}
+
+/**
+ * queue - sets the format of the data to a queue(FIFO)
+ * @stack - address of the stack
+ * @line_number - line number of the monty bytecode file where stack is called
+ *
+ * Return: Nothing
+ */
+void interpret_queue(stack_t **stack, unsigned int line_number)
+{
+	(*stack)->n = QUEUE;
+	(void) line_number;
 }

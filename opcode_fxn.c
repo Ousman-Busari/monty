@@ -45,8 +45,8 @@ void interpret_push(stack_t **stack, unsigned int line_number)
 		(*stack)->next = new_ele;
 		return;
 	}
-	temp = (*stack)->next;
-	while (temp)
+	temp = *stack;
+	while (temp->next)
 		temp = temp->next;
 	temp->next = new_ele, new_ele->prev = temp;
 }
