@@ -135,3 +135,30 @@ void interpret_rotl(stack_t **stack, unsigned int line_number)
 
 	(void) line_number;
 }
+
+/**
+ * interpret_rotr - rotates the stack to the bottom
+ * @stack: pointer to the head node of the list
+ * @line_number: the current working line of the monty bytecodes file
+ *
+ * Return: Nothing
+ */
+void interpret_rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp_end, *temp_top;
+
+	if ((*stack)->next == NULL)
+		return;
+
+	temp_end = (*stack)->next;
+	while (temp_end->next)
+		temp_end = temp_end->next;
+
+	temp_top = (*stack)->next;
+	temp_end->prev->next = NULL;
+	(*stack)->next = temp_end;
+	temp_end->next = temp_top;
+	temp_top->prev = temp_end;
+
+	(void) line_number;
+}

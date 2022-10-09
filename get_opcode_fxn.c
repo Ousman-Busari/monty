@@ -60,6 +60,7 @@ void (*get_interpreter(char *opcode))(stack_t **stack, unsigned int line_num)
 		{"pchar", interpret_pchar},
 		{"pstr", interpret_pstr},
 		{"rotl", interpret_rotl},
+		{"rotr", interpret_rotr},
 		{NULL, NULL}
 	};
 
