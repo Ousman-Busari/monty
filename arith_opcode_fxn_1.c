@@ -119,6 +119,9 @@ void interpret_rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp_end, *temp_top;
 
+	if ((*stack)->next == NULL)
+		return;
+
 	temp_end = (*stack)->next;
 	while (temp_end->next)
 		temp_end = temp_end->next;
