@@ -52,9 +52,9 @@ int is_stack(stack_t **stack)
 }
 
 /**
- * stack - sets the format of the data to a stack(LIFO)
- * @stack - address of the stack
- * @line_number - line number of the monty bytecode file where stack is called
+ * interpret_stack - sets the format of the data to a stack(LIFO)
+ * @stack: address of the stack
+ * @line_number: line number of the monty bytecode file where stack is called
  *
  * Return: Nothing
  */
@@ -65,9 +65,9 @@ void interpret_stack(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * queue - sets the format of the data to a queue(FIFO)
- * @stack - address of the stack
- * @line_number - line number of the monty bytecode file where stack is called
+ * interpret_queue - sets the format of the data to a queue(FIFO)
+ * @stack: address of the stack
+ * @line_number: line number of the monty bytecode file where stack is called
  *
  * Return: Nothing
  */
